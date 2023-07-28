@@ -7,12 +7,13 @@ import subprocess
 gi.require_version("Gtk", "3.0")
 gi.require_version("Handy", "1")
 
-from gi.repository import GObject, GLib, Gtk, Handy
+from gi.repository import Gio, GLib, GObject, Gtk, Handy
 
 Handy.init()
 
 door_address = "192.168.178.2"
 idle_task = None
+cancellable = None
 
 def main():
     builder = Gtk.Builder()
@@ -31,59 +32,97 @@ def main():
     state_stack = builder.get_object("state_stack")
     error_label = builder.get_object("error_label")
 
-    def task_searching():
-        global door_address
-        global idle_task
-
-        try:
-            code = subprocess.call("ping -c 1 %s" % door_address, shell=True)
-        except:
-            code = 1
-
-        if code == 0:
+    def task_search_complete(ps, res, user_data):
+        global cancellable
+        
+        if ps.get_successful():
             set_state("ready")
         else:
             set_state("error")
 
+        cancellable = None
+
+    def task_searching():
+        global door_address
+        global idle_task
+        global cancellable
+
+        if cancellable is None:
+            cancellable = Gio.Cancellable.new()
+
+        ps = Gio.Subprocess.new(["ping", "-c", "1", str(door_address)], Gio.SubprocessFlags.NONE)
+        ps.wait_async(cancellable, task_search_complete, None)
+
         idle_task = None
         return False
 
-    def task_open():
-        global door_address
-        global idle_task
+    def task_open_complete(ps, res, user_data):
+        global cancellable
+        
+        result = None
 
-        try:
-            result = subprocess.Popen("ssh auf@%s" % door_address, shell=True, stdout=subprocess.PIPE).stdout.read()
-        except:
-            result = "ERROR"
+        if ps.get_successful():
+            success, buffer, bytes_read = ps.get_stdout_pipe().read_all(cancellable)
+
+            if success:
+                result = str(buffer, 'UTF-8')
 
         if result == "UNLOCKED":
             set_state("ready")
         else:
             set_state("error")
 
+        cancellable = None
+
+    def task_open():
+        global door_address
+        global idle_task
+        global cancellable
+
+        if cancellable is None:
+            cancellable = Gio.Cancellable.new()
+
+        ps = Gio.Subprocess.new(["ssh", "auf@%s" % str(door_address)], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps.wait_async(cancellable, task_open_complete, None)
+
         idle_task = None
         return False
     
-    def task_close():
-        global door_address
-        global idle_task
+    def task_close_complete(ps, res, user_data):
+        global cancellable
+        
+        result = None
 
-        try:
-            result = subprocess.Popen("ssh zu@%s" % door_address, shell=True, stdout=subprocess.PIPE).stdout.read()
-        except:
-            result = "ERROR"
+        if ps.get_successful():
+            success, buffer, bytes_read = ps.get_stdout_pipe().read_all(cancellable)
+
+            if success:
+                result = str(buffer, 'UTF-8')
 
         if result == "LOCKED":
             set_state("ready")
         else:
             set_state("error")
 
+        cancellable = None
+    
+    def task_close():
+        global door_address
+        global idle_task
+        global cancellable
+
+        if cancellable is None:
+            cancellable = Gio.Cancellable.new()
+
+        ps = Gio.Subprocess.new(["ssh", "zu@%s" % str(door_address)], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps.wait_async(cancellable, task_close_complete, None)
+        
         idle_task = None
         return False
 
     def set_state(state, msg=None):
         global idle_task
+        global cancellable
 
         if state == "ready":
             refresh_button.set_sensitive(True)
@@ -104,9 +143,15 @@ def main():
             close_button.set_sensitive(False)
             cancel_button.set_sensitive(True)
 
+        if cancellable is not None:
+            cancellable.cancel()
+            cancellable = None
+
         if idle_task is not None:
             GLib.source_remove(idle_task)
 
+        state_stack.set_visible_child_name(state)
+        
         if state == "searching":
             idle_task = GLib.idle_add(task_searching)
         elif state == "opening":
@@ -115,8 +160,6 @@ def main():
             idle_task = GLib.idle_add(task_close)
         else:
             idle_task = None
-
-        state_stack.set_visible_child_name(state)
 
     def refresh(_button):
         set_state("searching")
@@ -128,7 +171,7 @@ def main():
         set_state("closing")
 
     def cancel(_button):
-        set_state("ready")
+        set_state("error")
 
     refresh_button.connect("clicked", refresh)
     open_button.connect("clicked", open_door)
