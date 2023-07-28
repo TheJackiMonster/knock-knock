@@ -35,7 +35,10 @@ def main():
         global door_address
         global idle_task
 
-        code = subprocess.call("ping -c 1 %s" % door_address, shell=True)
+        try:
+            code = subprocess.call("ping -c 1 %s" % door_address, shell=True)
+        except:
+            code = 1
 
         if code == 0:
             set_state("ready")
@@ -49,7 +52,10 @@ def main():
         global door_address
         global idle_task
 
-        result = subprocess.Popen("ssh auf@%s" % door_address, shell=True, stdout=subprocess.PIPE).stdout.read()
+        try:
+            result = subprocess.Popen("ssh auf@%s" % door_address, shell=True, stdout=subprocess.PIPE).stdout.read()
+        except:
+            result = "ERROR"
 
         if result == "UNLOCKED":
             set_state("ready")
@@ -63,7 +69,10 @@ def main():
         global door_address
         global idle_task
 
-        result = subprocess.Popen("ssh zu@%s" % door_address, shell=True, stdout=subprocess.PIPE).stdout.read()
+        try:
+            result = subprocess.Popen("ssh zu@%s" % door_address, shell=True, stdout=subprocess.PIPE).stdout.read()
+        except:
+            result = "ERROR"
 
         if result == "LOCKED":
             set_state("ready")
