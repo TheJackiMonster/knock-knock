@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Open door
+Comment=Open the door via your SSH key.
+TryExec=door
+Exec=door
+Icon=changes-allow
+Terminal=false
+Type=Application
+X-Purism-FormFactor=Workstation;Mobile;
