@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Open door
 Comment=Open the door via your SSH key.
-TryExec=door
-Exec=door
+TryExec=knock-knock
+Exec=knock-knock
 Icon=changes-allow
 Terminal=false
 Type=Application

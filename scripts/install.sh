@@ -13,7 +13,7 @@ cp new_door_dialog.ui /usr/local/share/knock-knock/new_door_dialog.ui
 cp edit_door_dialog.ui /usr/local/share/knock-knock/edit_door_dialog.ui
 
 mkdir -p /usr/local/bin
-cp bin/door /usr/local/bin/knock-knock
+cp bin/knock-knock /usr/local/bin/knock-knock
 
 mkdir -p /usr/local/share/applications
-cp door.desktop /usr/local/share/applications/knock-knock.desktop
+cp knock-knock.desktop /usr/local/share/applications/knock-knock.desktop
