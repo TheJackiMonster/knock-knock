@@ -83,7 +83,7 @@ class DoorCollection:
 
 
 collection = DoorCollection()
-current = Door()
+current = None
 
 
 def load_door(path):
@@ -158,6 +158,8 @@ def door_get_path(door):
 
 
 def load_collection():
+    global current
+
     data_dir = get_doors_data_dir()
 
     if (os.path.isdir(data_dir)) and (os.path.exists(data_dir)):
@@ -171,12 +173,9 @@ def load_collection():
             collection.add_door(door)
     
     doors = collection.list_doors()
+    current = doors[0] if len(doors) > 0 else None
     
-    if len(doors) > 0:
-        collection.select_door(doors[0])
-    else:
-        collection.select_door(None)
-    
+    collection.select_door(current)
     collection.reload_door()
 
 
@@ -681,6 +680,16 @@ def main():
         doors_listbox.add(widget)
         store_collection()
     
+    def window_reload_door():
+        global current
+
+        if current:
+            set_state("searching")
+        else:
+            set_state("none")
+        
+        menu_flap.set_reveal_flap(False)
+    
     def window_remove_door(door):
         row = door_get_row(door)
 
@@ -696,22 +705,15 @@ def main():
             return
         
         delete_door(path)
-    
-    def window_reload_door():
-        global current
+        current = None
 
-        if current:
-            set_state("searching")
-        else:
-            set_state("none")
-        
-        menu_flap.set_reveal_flap(False)
+        window_reload_door()
 
     collection.select_door = window_select_door
     collection.list_doors = window_list_doors
     collection.add_door = window_add_door
-    collection.remove_door = window_remove_door
     collection.reload_door = window_reload_door
+    collection.remove_door = window_remove_door
 
     def on_menu(_button):
         menu_flap.set_reveal_flap(not menu_flap.get_reveal_flap())
