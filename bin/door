@@ -1,2 +1,2 @@
 #!/bin/sh
-sh /usr/local/share/haxko-door/door.sh
+sh /usr/local/share/knock-knock/door.sh
