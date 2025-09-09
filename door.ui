@@ -32,6 +32,7 @@ Author: Tobias Frisch
   <object class="HdyWindow" id="window">
     <property name="height-request">500</property>
     <property name="can-focus">False</property>
+    <property name="icon-name">de.thejackimonster.KnockKnock</property>
     <property name="startup-id">de.thejackimonster.KnockKnock</property>
     <child>
       <object class="GtkBox">

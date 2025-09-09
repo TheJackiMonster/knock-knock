@@ -31,3 +31,6 @@ cp bin/knock-knock /usr/local/bin/knock-knock
 
 mkdir -p /usr/local/share/applications
 cp knock-knock.desktop /usr/local/share/applications/$APPLICATION_ID.desktop
+
+gtk-update-icon-cache -t /usr/local/share/icons/hicolor
+update-desktop-database

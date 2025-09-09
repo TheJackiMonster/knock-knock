@@ -29,6 +29,8 @@ application_id = "de.thejackimonster.KnockKnock"
 file_encoding = "utf-8"
 string_encoding = "utf-8"
 
+app = Gtk.Application.new(application_id, Gio.ApplicationFlags.FLAGS_NONE)
+
 
 class Door:
 
@@ -411,6 +413,8 @@ def main():
     builder.add_from_file("door.ui")
 
     window = builder.get_object("window")
+    window.set_application(app)
+
     window.connect("destroy", Gtk.main_quit)
     
     header_bar = builder.get_object("header_bar")
@@ -796,5 +800,10 @@ def main():
     window.show()
     Gtk.main()
 
-if __name__ == "__main__":
+def activate_main(_app):
     main()
+
+if __name__ == "__main__":
+    app.connect("activate", activate_main)
+    app.run()
+
