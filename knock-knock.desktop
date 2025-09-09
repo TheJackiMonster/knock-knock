@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Open door
+Name=Knock Knock
 Comment=Open the door via your SSH key.
 TryExec=knock-knock
 Exec=knock-knock
-Icon=changes-allow
+Icon=de.thejackimonster.KnockKnock
 Terminal=false
 Type=Application
 X-Purism-FormFactor=Workstation;Mobile;
