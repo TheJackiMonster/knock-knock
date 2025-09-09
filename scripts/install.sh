@@ -14,6 +14,12 @@ cp door_row.ui /usr/local/share/knock-knock/door_row.ui
 cp new_door_dialog.ui /usr/local/share/knock-knock/new_door_dialog.ui
 cp edit_door_dialog.ui /usr/local/share/knock-knock/edit_door_dialog.ui
 
+mkdir -p /usr/local/icons/hicolor/64x64/apps
+mkdir -p /usr/local/icons/hicolor/128x128/apps
+mkdir -p /usr/local/icons/hicolor/256x256/apps
+mkdir -p /usr/local/icons/hicolor/512x512/apps
+mkdir -p /usr/local/icons/hicolor/scalable/apps
+
 cp icon/64x64.png /usr/local/share/icons/hicolor/64x64/apps/$APPLICATION_ID.png
 cp icon/128x128.png /usr/local/share/icons/hicolor/128x128/apps/$APPLICATION_ID.png
 cp icon/256x256.png /usr/local/share/icons/hicolor/256x256/apps/$APPLICATION_ID.png
