@@ -9,6 +9,7 @@ cp AUTHORS /usr/local/share/knock-knock/AUTHORS
 cp LICENSE /usr/local/share/knock-knock/LICENSE
 cp door.py /usr/local/share/knock-knock/door.py
 cp door.sh /usr/local/share/knock-knock/door.sh
+cp style.css /usr/local/share/knock-knock/style.css
 cp -r ui /usr/local/share/knock-knock/ui
 
 mkdir -p /usr/local/icons/hicolor/64x64/apps

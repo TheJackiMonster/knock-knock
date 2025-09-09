@@ -34,8 +34,6 @@ string_encoding = "utf-8"
 
 app = Gtk.Application.new(application_id, Gio.ApplicationFlags.FLAGS_NONE)
 
-css = ".flap-background { background-color: @theme_bg_color; }"
-
 
 class Door:
 
@@ -836,9 +834,10 @@ def main():
 
 def init_style():
     screen = Gdk.Screen.get_default()
+    stylesheet = Gio.File.new_for_path("style.css")
 
     provider = Gtk.CssProvider.new()
-    provider.load_from_data(css)
+    provider.load_from_file(stylesheet)
 
     Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
