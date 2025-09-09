@@ -210,7 +210,7 @@ cancellable = None
 
 def new_door_dialog(window):
     builder = Gtk.Builder()
-    builder.add_from_file("new_door_dialog.ui")
+    builder.add_from_file("ui/new_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
 
@@ -290,7 +290,7 @@ def new_door_dialog(window):
 
 def edit_door_dialog(window):
     builder = Gtk.Builder()
-    builder.add_from_file("edit_door_dialog.ui")
+    builder.add_from_file("ui/edit_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
 
@@ -399,7 +399,7 @@ def edit_door_dialog(window):
 
 def about_dialog(window):
     builder = Gtk.Builder()
-    builder.add_from_file("about_door_dialog.ui")
+    builder.add_from_file("ui/about_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
 
@@ -418,7 +418,7 @@ def about_dialog(window):
 
 def door_row(door):
     builder = Gtk.Builder()
-    builder.add_from_file("door_row.ui")
+    builder.add_from_file("ui/door_row.ui")
 
     row = builder.get_object("row")
 
@@ -434,7 +434,7 @@ def door_row(door):
 
 def main():
     builder = Gtk.Builder()
-    builder.add_from_file("door.ui")
+    builder.add_from_file("ui/door.ui")
 
     window = builder.get_object("window")
     window.set_application(app)

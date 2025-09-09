@@ -9,11 +9,7 @@ cp AUTHORS /usr/local/share/knock-knock/AUTHORS
 cp LICENSE /usr/local/share/knock-knock/LICENSE
 cp door.py /usr/local/share/knock-knock/door.py
 cp door.sh /usr/local/share/knock-knock/door.sh
-cp door.ui /usr/local/share/knock-knock/door.ui
-cp door_row.ui /usr/local/share/knock-knock/door_row.ui
-cp new_door_dialog.ui /usr/local/share/knock-knock/new_door_dialog.ui
-cp edit_door_dialog.ui /usr/local/share/knock-knock/edit_door_dialog.ui
-cp about_door_dialog.ui /usr/local/share/knock-knock/about_door_dialog.ui
+cp -r ui /usr/local/share/knock-knock/ui
 
 mkdir -p /usr/local/icons/hicolor/64x64/apps
 mkdir -p /usr/local/icons/hicolor/128x128/apps
