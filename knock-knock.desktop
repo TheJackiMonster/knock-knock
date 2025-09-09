@@ -1,9 +1,13 @@
 [Desktop Entry]
 Name=Knock Knock
+GenericName=Knock Knock
 Comment=Open the door via your SSH key.
+Keywords=ssh;key;door
 TryExec=knock-knock
 Exec=knock-knock
 Icon=de.thejackimonster.KnockKnock
+StartupWMClass=de.thejackimonster.KnockKnock
+StartupNotify=true
 Terminal=false
 Type=Application
 X-Purism-FormFactor=Workstation;Mobile;
