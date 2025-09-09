@@ -35,6 +35,10 @@ string_encoding = "utf-8"
 app = Gtk.Application.new(application_id, Gio.ApplicationFlags.FLAGS_NONE)
 
 
+def error_msg(msg):
+    return str(msg)
+
+
 class Door:
 
     name = ""
@@ -470,7 +474,7 @@ def main():
         if ps.get_successful():
             set_state("ready")
         else:
-            set_state("error")
+            set_state("error", error_msg("Door not found!"))
 
         cancellable = None
 
@@ -499,6 +503,8 @@ def main():
 
             if success:
                 result = str(buffer, string_encoding)
+        else:
+            result = error_msg("Opening door failed!")
 
         if result == str(current.unlocked_val):
             set_state("ready")
@@ -532,6 +538,8 @@ def main():
 
             if success:
                 result = str(buffer, string_encoding)
+        else:
+            result = error_msg("Closing door failed!")
 
         if result == str(current.locked_val):
             set_state("ready")
@@ -565,6 +573,8 @@ def main():
 
             if success:
                 result = str(buffer, string_encoding)
+        else:
+            result = error_msg("Reading status failed!")
 
         if (result == str(current.locked_val)) or (result == str(current.unlocked_val)):
             set_state("status", result)
