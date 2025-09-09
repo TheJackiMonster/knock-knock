@@ -6,10 +6,12 @@ __copyright__ = "Copyright 2025, Tobias Frisch"
 __credits__ = "Tobias Frisch"
 
 __license__ = "GPL"
-__version__ = "3.0.0"
+__license_version__ = "3.0.0"
+
 __maintainer__ = "Tobias Frisch"
 __email__ = "jacki@thejackimonster.de"
 __status__ = "Production"
+__version__ = "0.0.1"
 
 import base64
 import gi
@@ -17,10 +19,11 @@ import json
 import os
 import subprocess
 
+gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("Handy", "1")
 
-from gi.repository import Gio, GLib, GObject, Gtk, Handy
+from gi.repository import Gio, GLib, GObject, Gdk, Gtk, Handy
 
 Handy.init()
 
@@ -30,6 +33,8 @@ file_encoding = "utf-8"
 string_encoding = "utf-8"
 
 app = Gtk.Application.new(application_id, Gio.ApplicationFlags.FLAGS_NONE)
+
+css = ".flap-background { background-color: @theme_bg_color; }"
 
 
 class Door:
@@ -392,6 +397,25 @@ def edit_door_dialog(window):
     dialog.show()
 
 
+def about_dialog(window):
+    builder = Gtk.Builder()
+    builder.add_from_file("about_door_dialog.ui")
+
+    dialog = builder.get_object("dialog")
+
+    close_button = builder.get_object("close_button")
+
+    def close(_button):
+        dialog.destroy()
+
+    dialog.set_version(__version__)
+
+    close_button.connect("clicked", close)
+
+    dialog.set_transient_for(window)
+    dialog.show()
+
+
 def door_row(door):
     builder = Gtk.Builder()
     builder.add_from_file("door_row.ui")
@@ -428,6 +452,9 @@ def main():
     remove_button = builder.get_object("remove_button")
 
     doors_listbox = builder.get_object("doors_listbox")
+
+    about_button = builder.get_object("about_button")
+    version_label = builder.get_object("version_label")
 
     refresh_button = builder.get_object("refresh_button")
     open_button = builder.get_object("open_button")
@@ -777,6 +804,11 @@ def main():
 
     def cancel(_button):
         set_state("error")
+
+    def about_info(_button):
+        about_dialog(window)
+
+    version_label.set_text(__version__)
     
     menu_button.connect("clicked", on_menu)
     settings_button.connect("clicked", on_settings)
@@ -793,6 +825,8 @@ def main():
     status_button.connect("clicked", read_status)
     cancel_button.connect("clicked", cancel)
 
+    about_button.connect("clicked", about_info)
+
     set_state("none")
 
     load_collection()
@@ -800,7 +834,16 @@ def main():
     window.show()
     Gtk.main()
 
+def init_style():
+    screen = Gdk.Screen.get_default()
+
+    provider = Gtk.CssProvider.new()
+    provider.load_from_data(css)
+
+    Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
 def activate_main(_app):
+    init_style()
     main()
 
 if __name__ == "__main__":
