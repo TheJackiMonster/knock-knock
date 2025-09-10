@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2025 Tobias Frisch -->
+<component type="desktop">
+	<id>de.thejackimonster.KnockKnock</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0</project_license>
+	<content_rating type="oars-1.0" />
+
+	<developer id="de.thejackimonster">
+		<name>Tobias Frisch</name>
+	</developer>
+
+	<name>Knock Knock</name>
+	<summary>Control a door remotely</summary>
+	<description>
+		<p>The Application is used to interact with doors via SSH in the local network.</p>
+		<p>It provides following functions:</p>
+		<ul>
+			<li>Searching for a door over IP in local network</li>
+			<li>Opening a door via custom SSH command</li>
+			<li>Closing a door via custom SSH command</li>
+			<li>Reading status of a door using SSH</li>
+		</ul>
+	</description>
+
+	<supports>
+		<control>pointing</control>
+		<control>keyboard</control>
+		<control>touch</control>
+	</supports>
+
+	<recommends>
+		<display_length compare="ge">450</display_length>
+	</recommends>
+
+	<requires>
+		<display_length compare="ge">360</display_length>
+		<display_length compare="le">3840</display_length>
+	</requires>
+
+	<screenshots>
+		<screenshot type="default">
+			<caption>Overview of the application</caption>
+			<image>https://gitlab.com/TheJackiMonster/knock-knock/-/raw/main/screenshots/overview.png</image>
+		</screenshot>
+	</screenshots>
+
+	<url type="homepage">https://gitlab.com/TheJackiMonster/knock-knock</url>
+	<url type="bugtracker">https://gitlab.com/TheJackiMonster/knock-knock/-/issues</url>
+	<url type="vcs-browser">https://gitlab.com/TheJackiMonster/knock-knock</url>
+	<url type="contribute">https://gitlab.com/TheJackiMonster/knock-knock</url>
+
+	<update_contact>jacki_at_thejackimonster.de</update_contact>
+
+	<launchable type="desktop-id">de.thejackimonster.KnockKnock.desktop</launchable>
+
+	<releases>
+		<release version="1.0.0" date="2025-09-10">
+			<description>
+				<ul>
+					<li>Doors can be pinged for in local network.</li>
+					<li>A custom command can be sent to open/close a door via SSH.</li>
+					<li>The current status of a door can be read via custom SSH command.</li>
+					<li>Configurations of doors can be managed and edited.</li>
+				</ul>
+			</description>
+			<url>https://gitlab.com/TheJackiMonster/knock-knock/-/releases/v1.0.0</url>
+		</release>
+	</releases>
+
+	<branding>
+		<color type="primary" scheme_preference="light">#7b96df</color>
+		<color type="primary" scheme_preference="dark">#1c2c54</color>
+	</branding>
+
+	<custom>
+		<value key="GnomeSoftware::key-colors">[(123, 150, 223), (28, 44, 84)]</value>
+	</custom>
+</component>

@@ -11,7 +11,7 @@ __license_version__ = "3.0.0"
 __maintainer__ = "Tobias Frisch"
 __email__ = "jacki@thejackimonster.de"
 __status__ = "Production"
-__version__ = "0.0.1"
+__version__ = "1.0.0"
 
 import base64
 import gi
@@ -212,7 +212,7 @@ cancellable = None
 
 def new_door_dialog(window):
     builder = Gtk.Builder()
-    builder.add_from_file("ui/new_door_dialog.ui")
+    builder.add_from_file("resources/ui/new_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
 
@@ -292,7 +292,7 @@ def new_door_dialog(window):
 
 def edit_door_dialog(window):
     builder = Gtk.Builder()
-    builder.add_from_file("ui/edit_door_dialog.ui")
+    builder.add_from_file("resources/ui/edit_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
 
@@ -401,7 +401,7 @@ def edit_door_dialog(window):
 
 def about_dialog(window):
     builder = Gtk.Builder()
-    builder.add_from_file("ui/about_door_dialog.ui")
+    builder.add_from_file("resources/ui/about_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
 
@@ -420,7 +420,7 @@ def about_dialog(window):
 
 def door_row(door):
     builder = Gtk.Builder()
-    builder.add_from_file("ui/door_row.ui")
+    builder.add_from_file("resources/ui/door_row.ui")
 
     row = builder.get_object("row")
 
@@ -436,7 +436,7 @@ def door_row(door):
 
 def main():
     builder = Gtk.Builder()
-    builder.add_from_file("ui/door.ui")
+    builder.add_from_file("resources/ui/door_window.ui")
 
     window = builder.get_object("window")
     window.set_application(app)
@@ -844,7 +844,7 @@ def main():
 
 def init_style():
     screen = Gdk.Screen.get_default()
-    stylesheet = Gio.File.new_for_path("style.css")
+    stylesheet = Gio.File.new_for_path("resources/style.css")
 
     provider = Gtk.CssProvider.new()
     provider.load_from_file(stylesheet)
