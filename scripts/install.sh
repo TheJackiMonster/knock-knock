@@ -5,7 +5,7 @@ cd ..
 APPLICATION_ID="de.thejackimonster.KnockKnock"
 PREFIX=/usr/local
 
-if [ $# -gt 1 ]; then
+if [ $# -gt 0 ]; then
 	PREFIX=$1
 fi
 
@@ -29,7 +29,9 @@ cp resources/icon/512x512.png $PREFIX/share/icons/hicolor/512x512/apps/$APPLICAT
 cp resources/$APPLICATION_ID.svg $PREFIX/share/icons/hicolor/scalable/apps/$APPLICATION_ID.svg
 
 mkdir -p $PREFIX/bin
-cp bin/knock-knock $PREFIX/bin/knock-knock
+echo "#!/bin/sh" > $PREFIX/bin/knock-knock
+echo "sh $PREFIX/share/knock-knock/door.sh" >> $PREFIX/bin/knock-knock
+chmod +x $PREFIX/bin/knock-knock
 
 mkdir -p $PREFIX/share/applications
 cp resources/$APPLICATION_ID.desktop $PREFIX/share/applications/$APPLICATION_ID.desktop

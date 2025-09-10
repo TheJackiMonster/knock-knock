@@ -5,7 +5,7 @@ cd ..
 APPLICATION_ID="de.thejackimonster.KnockKnock"
 PREFIX=/usr/local
 
-if [ $# -gt 1 ]; then
+if [ $# -gt 0 ]; then
 	PREFIX=$1
 fi
 
