@@ -2,7 +2,7 @@
 
 Application to interact with SSH doors
 
-![Icon of the application](knock-knock.svg)
+![Icon of the application](resources/de.thejackimonster.KnockKnock.svg)
 
 ## Features
 
