@@ -10,6 +10,14 @@ This application is used to interact with door locks via SSH over local network 
 
 ![Overview of the application](screenshots/overview.png)
 
+It provides following functions:
+
+ * Searching for a door over IP in local network
+ * Opening a door via custom SSH command
+ * Closing a door via custom SSH command
+ * Reading status of a door using SSH
+
+
 ## Installation
 
 The repository provides simple bash scripts to install (and uninstall) the application easily using following commands:
