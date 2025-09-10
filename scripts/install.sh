@@ -3,31 +3,36 @@ cd $(dirname $0)
 cd ..
 
 APPLICATION_ID="de.thejackimonster.KnockKnock"
+PREFIX=/usr/local
 
-mkdir -p /usr/local/share/knock-knock
-cp AUTHORS /usr/local/share/knock-knock/AUTHORS
-cp LICENSE /usr/local/share/knock-knock/LICENSE
-cp door.py /usr/local/share/knock-knock/door.py
-cp door.sh /usr/local/share/knock-knock/door.sh
-cp -r resources/ /usr/local/share/knock-knock/
+if [ $# -gt 1 ]; then
+	PREFIX=$1
+fi
 
-mkdir -p /usr/local/icons/hicolor/64x64/apps
-mkdir -p /usr/local/icons/hicolor/128x128/apps
-mkdir -p /usr/local/icons/hicolor/256x256/apps
-mkdir -p /usr/local/icons/hicolor/512x512/apps
-mkdir -p /usr/local/icons/hicolor/scalable/apps
+mkdir -p $PREFIX/share/knock-knock
+cp AUTHORS $PREFIX/share/knock-knock/AUTHORS
+cp LICENSE $PREFIX/share/knock-knock/LICENSE
+cp door.py $PREFIX/share/knock-knock/door.py
+cp door.sh $PREFIX/share/knock-knock/door.sh
+cp -r resources/ $PREFIX/share/knock-knock/
 
-cp resources/icon/64x64.png /usr/local/share/icons/hicolor/64x64/apps/$APPLICATION_ID.png
-cp resources/icon/128x128.png /usr/local/share/icons/hicolor/128x128/apps/$APPLICATION_ID.png
-cp resources/icon/256x256.png /usr/local/share/icons/hicolor/256x256/apps/$APPLICATION_ID.png
-cp resources/icon/512x512.png /usr/local/share/icons/hicolor/512x512/apps/$APPLICATION_ID.png
-cp resources/$APPLICATION_ID.svg /usr/local/share/icons/hicolor/scalable/apps/$APPLICATION_ID.svg
+mkdir -p $PREFIX/share/icons/hicolor/64x64/apps
+mkdir -p $PREFIX/share/icons/hicolor/128x128/apps
+mkdir -p $PREFIX/share/icons/hicolor/256x256/apps
+mkdir -p $PREFIX/share/icons/hicolor/512x512/apps
+mkdir -p $PREFIX/share/icons/hicolor/scalable/apps
 
-mkdir -p /usr/local/bin
-cp bin/knock-knock /usr/local/bin/knock-knock
+cp resources/icon/64x64.png $PREFIX/share/icons/hicolor/64x64/apps/$APPLICATION_ID.png
+cp resources/icon/128x128.png $PREFIX/share/icons/hicolor/128x128/apps/$APPLICATION_ID.png
+cp resources/icon/256x256.png $PREFIX/share/icons/hicolor/256x256/apps/$APPLICATION_ID.png
+cp resources/icon/512x512.png $PREFIX/share/icons/hicolor/512x512/apps/$APPLICATION_ID.png
+cp resources/$APPLICATION_ID.svg $PREFIX/share/icons/hicolor/scalable/apps/$APPLICATION_ID.svg
 
-mkdir -p /usr/local/share/applications
-cp resources/$APPLICATION_ID.desktop /usr/local/share/applications/$APPLICATION_ID.desktop
+mkdir -p $PREFIX/bin
+cp bin/knock-knock $PREFIX/bin/knock-knock
 
-gtk-update-icon-cache -t /usr/local/share/icons/hicolor
+mkdir -p $PREFIX/share/applications
+cp resources/$APPLICATION_ID.desktop $PREFIX/share/applications/$APPLICATION_ID.desktop
+
+gtk-update-icon-cache -t $PREFIX/share/icons/hicolor
 update-desktop-database
