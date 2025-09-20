@@ -2,6 +2,8 @@
 
 Application to interact with SSH doors
 
+[![knock-knock](https://snapcraft.io/knock-knock/badge.svg)](https://snapcraft.io/knock-knock)
+
 ![Icon of the application](resources/de.thejackimonster.KnockKnock.svg)
 
 ## Features
