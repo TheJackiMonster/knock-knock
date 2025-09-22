@@ -1,5 +1,5 @@
 name: knock-knock
-version: 1.0.3
+version: 1.0.4
 title: Knock Knock
 summary: Control a door remotely
 description: |
@@ -50,20 +50,26 @@ apps:
       - network
       - network-bind
       - network-observe
-    desktop: usr/share/knock-knock/resources/de.thejackimonster.KnockKnock.desktop
+    desktop: usr/share/applications/de.thejackimonster.KnockKnock.desktop
     common-id: de.thejackimonster.KnockKnock
 
 parts:
+  icmplib:
+    plugin: python
+    source: .
+    python-packages:
+      - icmplib
+
   knock-knock:
     plugin: dump
-    source: https://gitlab.com/TheJackiMonster/knock-knock/-/archive/v1.0.3/knock-knock-v1.0.3.tar.gz
-    source-checksum: sha256/24058839e25df6b041e491bf61cec0ab9387d534c793949b2edb13b0aa115377
+    after: [icmplib]
+    source: https://gitlab.com/TheJackiMonster/knock-knock/-/archive/v1.0.4/knock-knock-v1.0.4.tar.gz
+    source-checksum: sha256/0a065d2eb4b6f6722890853a08985352096084cb879eea71b310347e32fedb19
     stage-packages:
       - iputils-ping
       - openssh-client
       - python3
-      - python3-icmplib
       - desktop-file-utils
     override-prime: |
-      cd $SNAPCRAFT_PART_INSTALL
-      sh scripts/install.sh /usr
+      cd $CRAFT_PART_INSTALL
+      sh scripts/install.sh $CRAFT_PRIME/usr
