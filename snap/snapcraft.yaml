@@ -1,5 +1,5 @@
 name: knock-knock
-version: 1.0.4
+version: 1.0.5
 title: Knock Knock
 summary: Control a door remotely
 description: |
@@ -63,8 +63,8 @@ parts:
   knock-knock:
     plugin: dump
     after: [icmplib]
-    source: https://gitlab.com/TheJackiMonster/knock-knock/-/archive/v1.0.4/knock-knock-v1.0.4.tar.gz
-    source-checksum: sha256/0a065d2eb4b6f6722890853a08985352096084cb879eea71b310347e32fedb19
+    source: https://gitlab.com/TheJackiMonster/knock-knock/-/archive/v1.0.5/knock-knock-v1.0.5.tar.gz
+    source-checksum: sha256/98b79e62ba63d9fb2cc6b4587ee56ae3cfc6cae396860837041aed48873c48c6
     stage-packages:
       - iputils-ping
       - openssh-client
