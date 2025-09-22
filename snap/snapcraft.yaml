@@ -57,6 +57,7 @@ parts:
   knock-knock:
     plugin: dump
     source: https://gitlab.com/TheJackiMonster/knock-knock/-/archive/v1.0.2/knock-knock-v1.0.2.tar.gz
+    source-checksum: sha256/cbcc970d245853d37edb90e4fd3c71b4711dfc9e84d921ee488f34782e3e9c2e
     stage-packages:
       - iputils-ping
       - openssh-client
