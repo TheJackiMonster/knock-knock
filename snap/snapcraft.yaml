@@ -50,6 +50,7 @@ apps:
       - network
       - network-bind
       - network-observe
+      - ssh-keys
     desktop: usr/share/applications/de.thejackimonster.KnockKnock.desktop
     common-id: de.thejackimonster.KnockKnock
 
@@ -60,14 +61,17 @@ parts:
     python-packages:
       - icmplib
 
+  ssh-client:
+    plugin: nil
+    stage-packages:
+      - openssh-client
+
   knock-knock:
     plugin: dump
-    after: [icmplib]
+    after: [icmplib, ssh-client]
     source: https://gitlab.com/TheJackiMonster/knock-knock/-/archive/v1.0.5/knock-knock-v1.0.5.tar.gz
     source-checksum: sha256/98b79e62ba63d9fb2cc6b4587ee56ae3cfc6cae396860837041aed48873c48c6
     stage-packages:
-      - iputils-ping
-      - openssh-client
       - python3
       - desktop-file-utils
     override-prime: |
