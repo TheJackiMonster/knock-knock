@@ -19,6 +19,7 @@ import json
 import os
 import subprocess
 
+
 gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
 gi.require_version("Handy", "1")
@@ -486,7 +487,7 @@ def main():
         if cancellable is None:
             cancellable = Gio.Cancellable.new()
 
-        ps = Gio.Subprocess.new(["ping", "-c", "1", str(current.address)], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps = Gio.Subprocess.new(["python3", "knock.py", str(current.address)], Gio.SubprocessFlags.STDOUT_PIPE)
         ps.wait_async(cancellable, task_search_complete, None)
 
         idle_task = None
@@ -521,7 +522,7 @@ def main():
         if cancellable is None:
             cancellable = Gio.Cancellable.new()
 
-        ps = Gio.Subprocess.new(["ssh", "%s@%s" % (str(current.open_cmd), str(current.address))], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps = Gio.Subprocess.new(["ssh", "-n", "%s@%s" % (str(current.open_cmd), str(current.address))], Gio.SubprocessFlags.STDOUT_PIPE)
         ps.wait_async(cancellable, task_open_complete, None)
 
         idle_task = None
@@ -556,7 +557,7 @@ def main():
         if cancellable is None:
             cancellable = Gio.Cancellable.new()
 
-        ps = Gio.Subprocess.new(["ssh", "%s@%s" % (str(current.close_cmd), str(current.address))], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps = Gio.Subprocess.new(["ssh", "-n", "%s@%s" % (str(current.close_cmd), str(current.address))], Gio.SubprocessFlags.STDOUT_PIPE)
         ps.wait_async(cancellable, task_close_complete, None)
         
         idle_task = None

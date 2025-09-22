@@ -13,6 +13,7 @@ mkdir -p $PREFIX/share/knock-knock
 cp AUTHORS $PREFIX/share/knock-knock/AUTHORS
 cp LICENSE $PREFIX/share/knock-knock/LICENSE
 cp door.py $PREFIX/share/knock-knock/door.py
+cp knock.py $PREFIX/share/knock-knock/knock.py
 cp door.sh $PREFIX/share/knock-knock/door.sh
 cp -r resources/ $PREFIX/share/knock-knock/
 
