@@ -487,7 +487,11 @@ def main():
         if cancellable is None:
             cancellable = Gio.Cancellable.new()
 
-        ps = Gio.Subprocess.new(["python3", "knock.py", str(current.address)], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps = Gio.Subprocess.new(
+            ["python3", "knock.py", str(current.address), str(current.port)],
+            Gio.SubprocessFlags.STDOUT_PIPE
+        )
+
         ps.wait_async(cancellable, task_search_complete, None)
 
         idle_task = None
@@ -522,7 +526,11 @@ def main():
         if cancellable is None:
             cancellable = Gio.Cancellable.new()
 
-        ps = Gio.Subprocess.new(["ssh", "-n", "%s@%s" % (str(current.open_cmd), str(current.address))], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps = Gio.Subprocess.new(
+            ["ssh", "-p", str(current.port), "-n", "%s@%s" % (str(current.open_cmd), str(current.address))],
+            Gio.SubprocessFlags.STDOUT_PIPE
+        )
+
         ps.wait_async(cancellable, task_open_complete, None)
 
         idle_task = None
@@ -557,7 +565,11 @@ def main():
         if cancellable is None:
             cancellable = Gio.Cancellable.new()
 
-        ps = Gio.Subprocess.new(["ssh", "-n", "%s@%s" % (str(current.close_cmd), str(current.address))], Gio.SubprocessFlags.STDOUT_PIPE)
+        ps = Gio.Subprocess.new(
+            ["ssh", "-p", str(current.port), "-n", "%s@%s" % (str(current.close_cmd), str(current.address))],
+            Gio.SubprocessFlags.STDOUT_PIPE
+        )
+
         ps.wait_async(cancellable, task_close_complete, None)
         
         idle_task = None
