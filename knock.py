@@ -16,11 +16,14 @@ __version__ = "1.0.0"
 import sys
 
 try:
-    from icmplib import ping
+    from icmplib import ping, SocketPermissionError
 
     def knock(address):
-        host = ping(sys.argv[1], count=1, privileged=False)
-        return host.is_alive
+        try:
+            host = ping(address, count=1, privileged=False)
+            return host.is_alive
+        except SocketPermissionError:
+            return False
 
 except ModuleNotFoundError:
     import subprocess
