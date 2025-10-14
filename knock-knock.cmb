@@ -2,7 +2,7 @@
 <!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
 <!-- Created with Cambalache 0.96.1 -->
 <cambalache-project version="0.96.0" target_tk="gtk-4.0">
-  <css filename="resources/style.css"/>
+  <css filename="resources/style.css" is_global="1"/>
   <ui filename="resources/ui/about_door_dialog.ui" sha256="3b3d10bed01aea3d8bd3c8d9f2e299486ab81f7269ecc01de1c5a75c94b775e0"/>
   <ui filename="resources/ui/door_row.ui" sha256="b879b6b7b71669afeb0bb3d7b856438390e7d4a973450148884b3b7683060c44"/>
   <ui filename="resources/ui/door_window.ui" sha256="fe516bdb6db4500c6ae00396f24222a18fa5f6d3a763874a15aaacc5cf7b02d4"/>
