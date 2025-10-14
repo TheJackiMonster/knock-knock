@@ -1,5 +1,6 @@
 
 .flap-background {
 	background-color: @theme_bg_color;
+	border-right: 1px solid @borders;
+	box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.2);
 }
-

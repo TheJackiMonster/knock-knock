@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE cambalache-project SYSTEM "cambalache-project.dtd">
+<!-- Created with Cambalache 0.96.1 -->
+<cambalache-project version="0.96.0" target_tk="gtk-4.0">
+  <css filename="resources/style.css"/>
+  <ui filename="resources/ui/about_door_dialog.ui" sha256="3b3d10bed01aea3d8bd3c8d9f2e299486ab81f7269ecc01de1c5a75c94b775e0"/>
+  <ui filename="resources/ui/door_row.ui" sha256="b879b6b7b71669afeb0bb3d7b856438390e7d4a973450148884b3b7683060c44"/>
+  <ui filename="resources/ui/door_window.ui" sha256="bd12216cc723f6e981747bf4bc462f6a9161c7b479448ef1d4430b2667edff64"/>
+  <ui filename="resources/ui/edit_door_dialog.ui" sha256="4135bebe6a7d1cda862f49b3d798963ebab15c00020d01610266e589d9036bcb"/>
+  <ui filename="resources/ui/new_door_dialog.ui" sha256="181f251c010d60629843f40b00c98a516b04a0ee2eb8764c48e47f94164df9d2"/>
+</cambalache-project>

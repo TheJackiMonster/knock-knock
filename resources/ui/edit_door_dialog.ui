@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.40.0 
-
-Copyright (C) Tobias Frisch
-
-This file is part of Knock Knock.
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.1 -->
+<!--This file is part of Knock Knock.
 
 Knock Knock is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,318 +13,105 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.
-
-Author: Tobias Frisch
-
--->
+along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.-->
 <interface>
-  <requires lib="gtk+" version="3.24"/>
-  <!-- interface-license-type gplv3 -->
-  <!-- interface-name Knock Knock -->
-  <!-- interface-description Application to interact with SSH doors -->
-  <!-- interface-copyright Tobias Frisch -->
+  <!-- interface-name edit_door_dialog.ui -->
+  <!-- interface-copyright Copyright (C) Tobias Frisch -->
   <!-- interface-authors Tobias Frisch -->
-  <object class="GtkAdjustment" id="port_adjustment">
-    <property name="upper">65535</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkDialog" id="dialog">
-    <property name="width-request">320</property>
-    <property name="height-request">450</property>
-    <property name="title" translatable="yes">Configure door</property>
-    <property name="modal">1</property>
-    <property name="window-position">center-on-parent</property>
-    <property name="icon-name">de.thejackimonster.KnockKnock</property>
-    <property name="type-hint">dialog</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="layout-style">end</property>
+  <requires lib="libadwaita" version="1.6"/>
+  <requires lib="gtk" version="4.0"/>
+  <object class="AdwPreferencesDialog" id="dialog">
+    <property name="content-height">770</property>
+    <property name="content-width">300</property>
+    <property name="search-enabled">True</property>
+    <property name="title">Configure door</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="banner">
+          <object class="AdwBanner" id="banner">
+            <property name="button-label">Confirm</property>
+            <property name="button-style">suggested</property>
+            <property name="revealed">True</property>
+            <property name="title">Apply changes to door entry?</property>
+          </object>
+        </property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title">Details</property>
             <child>
-              <object class="GtkButton" id="cancel_button">
-                <property name="label" translatable="yes">Cancel</property>
-                <property name="visible">1</property>
-                <property name="can-focus">1</property>
-                <property name="receives-default">1</property>
+              <object class="AdwEntryRow" id="name_row">
+                <property name="editable">False</property>
+                <property name="text">Door name</property>
+                <property name="title">Name</property>
               </object>
-              <packing>
-                <property name="expand">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="confirm_button">
-                <property name="label" translatable="yes">Confirm</property>
-                <property name="visible">1</property>
-                <property name="can-focus">1</property>
-                <property name="receives-default">1</property>
-              </object>
-              <packing>
-                <property name="expand">1</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="fill">0</property>
-            <property name="position">2</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow">
-            <property name="visible">1</property>
-            <property name="can-focus">1</property>
-            <property name="hscrollbar-policy">never</property>
+          <object class="AdwPreferencesGroup">
+            <property name="title">Connection</property>
             <child>
-              <object class="GtkViewport">
-                <property name="visible">1</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">1</property>
-                    <property name="valign">center</property>
-                    <property name="margin-start">8</property>
-                    <property name="margin-end">8</property>
-                    <property name="margin-top">8</property>
-                    <property name="margin-bottom">8</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">8</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Name:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="name_label">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Door name</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Address:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="address_entry">
-                            <property name="visible">1</property>
-                            <property name="can-focus">1</property>
-                            <property name="placeholder-text" translatable="yes">127.0.0.1</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Port:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkSpinButton" id="port_spinbutton">
-                            <property name="visible">1</property>
-                            <property name="can-focus">1</property>
-                            <property name="input-purpose">number</property>
-                            <property name="adjustment">port_adjustment</property>
-                            <property name="numeric">1</property>
-                            <property name="value">22</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Open Command:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="open_entry">
-                            <property name="visible">1</property>
-                            <property name="can-focus">1</property>
-                            <property name="placeholder-text" translatable="yes">open</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Close Command:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="close_entry">
-                            <property name="visible">1</property>
-                            <property name="can-focus">1</property>
-                            <property name="placeholder-text" translatable="yes">close</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">4</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">State Command:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="state_entry">
-                            <property name="visible">1</property>
-                            <property name="can-focus">1</property>
-                            <property name="placeholder-text" translatable="yes">state</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">5</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Locked Value:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="locked_entry">
-                            <property name="visible">1</property>
-                            <property name="can-focus">1</property>
-                            <property name="placeholder-text" translatable="yes">LOCKED</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">6</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="spacing">16</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Unlocked Value:</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkEntry" id="unlocked_entry">
-                            <property name="visible">1</property>
-                            <property name="can-focus">1</property>
-                            <property name="placeholder-text" translatable="yes">UNLOCKED</property>
-                          </object>
-                          <packing>
-                            <property name="expand">1</property>
-                            <property name="pack-type">end</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="position">7</property>
-                      </packing>
-                    </child>
+              <object class="AdwEntryRow" id="address_row">
+                <property name="input-purpose">url</property>
+                <property name="text">127.0.0.1</property>
+                <property name="title">Address</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="port_row">
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="step-increment">1.0</property>
+                    <property name="upper">65535.0</property>
+                    <property name="value">22.0</property>
                   </object>
-                </child>
+                </property>
+                <property name="numeric">True</property>
+                <property name="title">Port</property>
+                <property name="value">22.0</property>
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">1</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkSeparator">
-            <property name="visible">1</property>
-            <property name="orientation">vertical</property>
+          <object class="AdwPreferencesGroup">
+            <property name="title">Commands</property>
+            <child>
+              <object class="AdwEntryRow" id="open_row">
+                <property name="text">open</property>
+                <property name="title">Open Command</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="close_row">
+                <property name="text">close</property>
+                <property name="title">Close Command</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="state_row">
+                <property name="text">state</property>
+                <property name="title">State Command</property>
+              </object>
+            </child>
           </object>
-          <packing>
-            <property name="position">1</property>
-          </packing>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title">Command Values</property>
+            <child>
+              <object class="AdwEntryRow" id="locked_row">
+                <property name="text">LOCKED</property>
+                <property name="title">Locked Value</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="unlocked_row">
+                <property name="text">UNLOCKED</property>
+                <property name="title">Unlocked Value</property>
+              </object>
+            </child>
+          </object>
         </child>
       </object>
     </child>

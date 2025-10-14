@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.40.0 
-
-Copyright (C) Tobias Frisch
-
-This file is part of Knock Knock.
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.1 -->
+<!--This file is part of Knock Knock.
 
 Knock Knock is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,43 +13,31 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.
-
-Author: Tobias Frisch
-
--->
+along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.-->
 <interface>
-  <requires lib="gtk+" version="3.24"/>
-  <!-- interface-license-type gplv3 -->
-  <!-- interface-name Knock Knock -->
-  <!-- interface-description Application to interact with SSH doors -->
-  <!-- interface-copyright Tobias Frisch -->
+  <!-- interface-name door_row.ui -->
+  <!-- interface-copyright Copyright (C) Tobias Frisch -->
   <!-- interface-authors Tobias Frisch -->
+  <requires lib="gtk" version="4.18"/>
   <object class="GtkBox" id="row">
-    <property name="visible">1</property>
     <property name="spacing">4</property>
     <child>
       <object class="GtkImage">
-        <property name="visible">1</property>
-        <property name="valign">center</property>
-        <property name="margin-start">8</property>
-        <property name="margin-end">8</property>
-        <property name="margin-top">8</property>
-        <property name="margin-bottom">8</property>
         <property name="icon-name">system-lock-screen-symbolic</property>
-        <property name="icon-size">3</property>
+        <property name="icon-size">large</property>
+        <property name="margin-bottom">8</property>
+        <property name="margin-end">8</property>
+        <property name="margin-start">8</property>
+        <property name="margin-top">8</property>
+        <property name="pixel-size">32</property>
       </object>
     </child>
     <child>
       <object class="GtkLabel" id="name_label">
-        <property name="visible">1</property>
-        <property name="label" translatable="yes">Name</property>
+        <property name="hexpand">True</property>
+        <property name="label">Name</property>
+        <property name="margin-end">48</property>
       </object>
-      <packing>
-        <property name="expand">1</property>
-        <property name="pack-type">end</property>
-        <property name="position">1</property>
-      </packing>
     </child>
   </object>
 </interface>

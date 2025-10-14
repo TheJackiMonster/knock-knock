@@ -20,20 +20,16 @@ import os
 import subprocess
 
 
-gi.require_version("Gdk", "3.0")
-gi.require_version("Gtk", "3.0")
-gi.require_version("Handy", "1")
+gi.require_version("Gdk", "4.0")
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
 
-from gi.repository import Gio, GLib, GObject, Gdk, Gtk, Handy
-
-Handy.init()
+from gi.repository import Gio, GLib, Gdk, Gtk, Adw
 
 
 application_id = "de.thejackimonster.KnockKnock"
 file_encoding = "utf-8"
 string_encoding = "utf-8"
-
-app = Gtk.Application.new(application_id, Gio.ApplicationFlags.FLAGS_NONE)
 
 
 def error_msg(msg):
@@ -216,47 +212,46 @@ def new_door_dialog(window):
     builder.add_from_file("resources/ui/new_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
+    banner = builder.get_object("banner")
 
-    cancel_button = builder.get_object("cancel_button")
-    confirm_button = builder.get_object("confirm_button")
-
-    name_entry = builder.get_object("name_entry")
-    address_entry = builder.get_object("address_entry")
-    port_spinbutton = builder.get_object("port_spinbutton")
-    open_entry = builder.get_object("open_entry")
-    close_entry = builder.get_object("close_entry")
-    state_entry = builder.get_object("state_entry")
-    locked_entry = builder.get_object("locked_entry")
-    unlocked_entry = builder.get_object("unlocked_entry")
+    name_row = builder.get_object("name_row")
+    address_row = builder.get_object("address_row")
+    port_row = builder.get_object("port_row")
+    open_row = builder.get_object("open_row")
+    close_row = builder.get_object("close_row")
+    state_row = builder.get_object("state_row")
+    locked_row = builder.get_object("locked_row")
+    unlocked_row = builder.get_object("unlocked_row")
 
     door = Door()
 
-    def change_name(entry):
-        door.name = str(entry.get_text())
-    
-    def change_address(entry):
-        door.address = str(entry.get_text())
-    
-    def change_port(spinbutton):
-        door.port = int(spinbutton.get_value())
-    
-    def change_open_cmd(entry):
-        door.open_cmd = str(entry.get_text())
-    
-    def change_close_cmd(entry):
-        door.close_cmd = str(entry.get_text())
-    
-    def change_state_cmd(entry):
-        door.state_cmd = str(entry.get_text())
-    
-    def change_locked_val(entry):
-        door.locked_val = str(entry.get_text())
-    
-    def change_unlocked_val(entry):
-        door.unlocked_val = str(entry.get_text())
+    def update_banner():
+        banner.set_revealed(len(door.name) > 0)
 
-    def cancel(_button):
-        dialog.destroy()
+    def change_name(row):
+        door.name = str(row.get_text())
+        update_banner()
+    
+    def change_address(row):
+        door.address = str(row.get_text())
+    
+    def change_port(row):
+        door.port = int(row.get_value())
+    
+    def change_open_cmd(row):
+        door.open_cmd = str(row.get_text())
+    
+    def change_close_cmd(row):
+        door.close_cmd = str(row.get_text())
+    
+    def change_state_cmd(row):
+        door.state_cmd = str(row.get_text())
+    
+    def change_locked_val(row):
+        door.locked_val = str(row.get_text())
+    
+    def change_unlocked_val(row):
+        door.unlocked_val = str(row.get_text())
     
     def confirm(_button):
         global collection
@@ -264,31 +259,31 @@ def new_door_dialog(window):
         collection.add_door(door)
         collection.select_door(door)
 
-        dialog.destroy()
+        dialog.force_close()
     
-    name_entry.set_text(str(door.name))
-    address_entry.set_text(str(door.address))
-    port_spinbutton.set_value(int(door.port))
-    open_entry.set_text(str(door.open_cmd))
-    close_entry.set_text(str(door.close_cmd))
-    state_entry.set_text(str(door.state_cmd))
-    locked_entry.set_text(str(door.locked_val))
-    unlocked_entry.set_text(str(door.unlocked_val))
+    name_row.set_text(str(door.name))
+    address_row.set_text(str(door.address))
+    port_row.set_value(int(door.port))
+    open_row.set_text(str(door.open_cmd))
+    close_row.set_text(str(door.close_cmd))
+    state_row.set_text(str(door.state_cmd))
+    locked_row.set_text(str(door.locked_val))
+    unlocked_row.set_text(str(door.unlocked_val))
 
-    cancel_button.connect("clicked", cancel)
-    confirm_button.connect("clicked", confirm)
+    update_banner()
 
-    name_entry.connect("changed", change_name)
-    address_entry.connect("changed", change_address)
-    port_spinbutton.connect("changed", change_port)
-    open_entry.connect("changed", change_open_cmd)
-    close_entry.connect("changed", change_close_cmd)
-    state_entry.connect("changed", change_state_cmd)
-    locked_entry.connect("changed", change_locked_val)
-    unlocked_entry.connect("changed", change_unlocked_val)
+    banner.connect("button-clicked", confirm)
 
-    dialog.set_transient_for(window)
-    dialog.show()
+    name_row.connect("changed", change_name)
+    address_row.connect("changed", change_address)
+    port_row.connect("changed", change_port)
+    open_row.connect("changed", change_open_cmd)
+    close_row.connect("changed", change_close_cmd)
+    state_row.connect("changed", change_state_cmd)
+    locked_row.connect("changed", change_locked_val)
+    unlocked_row.connect("changed", change_unlocked_val)
+
+    dialog.present(window)
 
 
 def edit_door_dialog(window):
@@ -296,18 +291,16 @@ def edit_door_dialog(window):
     builder.add_from_file("resources/ui/edit_door_dialog.ui")
 
     dialog = builder.get_object("dialog")
+    banner = builder.get_object("banner")
 
-    cancel_button = builder.get_object("cancel_button")
-    confirm_button = builder.get_object("confirm_button")
-
-    name_label = builder.get_object("name_label")
-    address_entry = builder.get_object("address_entry")
-    port_spinbutton = builder.get_object("port_spinbutton")
-    open_entry = builder.get_object("open_entry")
-    close_entry = builder.get_object("close_entry")
-    state_entry = builder.get_object("state_entry")
-    locked_entry = builder.get_object("locked_entry")
-    unlocked_entry = builder.get_object("unlocked_entry")
+    name_row = builder.get_object("name_row")
+    address_row = builder.get_object("address_row")
+    port_row = builder.get_object("port_row")
+    open_row = builder.get_object("open_row")
+    close_row = builder.get_object("close_row")
+    state_row = builder.get_object("state_row")
+    locked_row = builder.get_object("locked_row")
+    unlocked_row = builder.get_object("unlocked_row")
 
     door = Door()
 
@@ -320,41 +313,38 @@ def edit_door_dialog(window):
     door.locked_val = str(current.locked_val)
     door.unlocked_val = str(current.unlocked_val)
 
-    def update_buttons():
+    def update_banner():
         global current
-
-        confirm_button.set_sensitive(not door.equals(current))
     
-    def change_address(entry):
-        door.address = str(entry.get_text())
-        update_buttons()
+        banner.set_revealed(not door.equals(current))
     
-    def change_port(spinbutton):
-        door.port = int(spinbutton.get_value())
-        update_buttons()
+    def change_address(row):
+        door.address = str(row.get_text())
+        update_banner()
     
-    def change_open_cmd(entry):
-        door.open_cmd = str(entry.get_text())
-        update_buttons()
+    def change_port(row):
+        door.port = int(row.get_value())
+        update_banner()
     
-    def change_close_cmd(entry):
-        door.close_cmd = str(entry.get_text())
-        update_buttons()
+    def change_open_cmd(row):
+        door.open_cmd = str(row.get_text())
+        update_banner()
     
-    def change_state_cmd(entry):
-        door.state_cmd = str(entry.get_text())
-        update_buttons()
+    def change_close_cmd(row):
+        door.close_cmd = str(row.get_text())
+        update_banner()
     
-    def change_locked_val(entry):
-        door.locked_val = str(entry.get_text())
-        update_buttons()
+    def change_state_cmd(row):
+        door.state_cmd = str(row.get_text())
+        update_banner()
     
-    def change_unlocked_val(entry):
-        door.unlocked_val = str(entry.get_text())
-        update_buttons()
-
-    def cancel(_button):
-        dialog.destroy()
+    def change_locked_val(row):
+        door.locked_val = str(row.get_text())
+        update_banner()
+    
+    def change_unlocked_val(row):
+        door.unlocked_val = str(row.get_text())
+        update_banner()
     
     def confirm(_button):
         global current
@@ -371,33 +361,30 @@ def edit_door_dialog(window):
 
         store_collection()
         collection.reload_door()
-
-        dialog.destroy()
+        update_banner()
     
-    name_label.set_text(str(door.name))
-    address_entry.set_text(str(door.address))
-    port_spinbutton.set_value(int(door.port))
-    open_entry.set_text(str(door.open_cmd))
-    close_entry.set_text(str(door.close_cmd))
-    state_entry.set_text(str(door.state_cmd))
-    locked_entry.set_text(str(door.locked_val))
-    unlocked_entry.set_text(str(door.unlocked_val))
+    name_row.set_text(str(door.name))
+    address_row.set_text(str(door.address))
+    port_row.set_value(int(door.port))
+    open_row.set_text(str(door.open_cmd))
+    close_row.set_text(str(door.close_cmd))
+    state_row.set_text(str(door.state_cmd))
+    locked_row.set_text(str(door.locked_val))
+    unlocked_row.set_text(str(door.unlocked_val))
 
-    update_buttons()
+    update_banner()
 
-    cancel_button.connect("clicked", cancel)
-    confirm_button.connect("clicked", confirm)
+    banner.connect("button-clicked", confirm)
 
-    address_entry.connect("changed", change_address)
-    port_spinbutton.connect("changed", change_port)
-    open_entry.connect("changed", change_open_cmd)
-    close_entry.connect("changed", change_close_cmd)
-    state_entry.connect("changed", change_state_cmd)
-    locked_entry.connect("changed", change_locked_val)
-    unlocked_entry.connect("changed", change_unlocked_val)
+    address_row.connect("changed", change_address)
+    port_row.connect("changed", change_port)
+    open_row.connect("changed", change_open_cmd)
+    close_row.connect("changed", change_close_cmd)
+    state_row.connect("changed", change_state_cmd)
+    locked_row.connect("changed", change_locked_val)
+    unlocked_row.connect("changed", change_unlocked_val)
 
-    dialog.set_transient_for(window)
-    dialog.show()
+    dialog.present(window)
 
 
 def about_dialog(window):
@@ -406,17 +393,9 @@ def about_dialog(window):
 
     dialog = builder.get_object("dialog")
 
-    close_button = builder.get_object("close_button")
-
-    def close(_button):
-        dialog.destroy()
-
     dialog.set_version(__version__)
 
-    close_button.connect("clicked", close)
-
-    dialog.set_transient_for(window)
-    dialog.show()
+    dialog.present(window)
 
 
 def door_row(door):
@@ -435,14 +414,14 @@ def door_row(door):
     return row
 
 
-def main():
+def main(application):
     builder = Gtk.Builder()
     builder.add_from_file("resources/ui/door_window.ui")
 
     window = builder.get_object("window")
-    window.set_application(app)
+    window.set_application(application)
 
-    window.connect("destroy", Gtk.main_quit)
+    print(application.get_application_id())
     
     header_bar = builder.get_object("header_bar")
     menu_flap = builder.get_object("menu_flap")
@@ -684,12 +663,7 @@ def main():
         if not row:
             return None
 
-        children = row.get_children()
-        child = None
-
-        if len(children) > 0:
-            child = children[0]
-        
+        child = row.get_first_child()
         return child.door if child else None
     
     def door_get_row(door):
@@ -710,17 +684,19 @@ def main():
         doors_listbox.select_row(row)
     
     def window_list_doors():
-        children = doors_listbox.get_children()
+        row = doors_listbox.get_first_child()
         doors = []
 
-        for row in children:
+        while row:
             door = row_get_door(row)
 
             if not door:
+                row = row.get_next_sibling()
                 continue
 
             doors.append(door)
-
+            row = row.get_next_sibling()
+        
         return doors
     
     def window_add_door(door):
@@ -729,7 +705,7 @@ def main():
         if not widget:
             return
         
-        doors_listbox.add(widget)
+        doors_listbox.append(widget)
         store_collection()
     
     def window_reload_door():
@@ -749,8 +725,6 @@ def main():
             return
         
         doors_listbox.remove(row)
-        row.destroy()
-
         path = door_get_path(door)
 
         if not path:
@@ -852,23 +826,33 @@ def main():
 
     load_collection()
 
-    window.show()
-    Gtk.main()
+    window.present()
 
 def init_style():
-    screen = Gdk.Screen.get_default()
+    display = Gdk.Display.get_default()
     stylesheet = Gio.File.new_for_path("resources/style.css")
 
     provider = Gtk.CssProvider.new()
     provider.load_from_file(stylesheet)
 
-    Gtk.StyleContext.add_provider_for_screen(screen, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+    Gtk.StyleContext.add_provider_for_display(display, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-def activate_main(_app):
+def activate_main(application):
     init_style()
-    main()
+    main(application)
+
+class KnockKnockApp(Adw.Application):
+
+    def __init__(self):
+        super().__init__(application_id=application_id, flags=Gio.ApplicationFlags.FLAGS_NONE)
+        Adw.init()
+    
+    def do_activate(self):
+        if not self.props.active_window:
+            activate_main(self)
+
 
 if __name__ == "__main__":
-    app.connect("activate", activate_main)
+    app = KnockKnockApp()
     app.run()
 

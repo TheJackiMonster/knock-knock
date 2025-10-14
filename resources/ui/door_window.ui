@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.40.0 
-
-Copyright (C) Tobias Frisch
-
-This file is part of Knock Knock.
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Created with Cambalache 0.96.1 -->
+<!--This file is part of Knock Knock.
 
 Knock Knock is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,575 +13,419 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.
-
-Author: Tobias Frisch
-
--->
+along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.-->
 <interface>
-  <requires lib="gtk+" version="3.24"/>
-  <requires lib="libhandy" version="1.2"/>
-  <!-- interface-license-type gplv3 -->
-  <!-- interface-name Knock Knock -->
-  <!-- interface-description Application to interact with SSH doors -->
-  <!-- interface-copyright Tobias Frisch -->
+  <!-- interface-name door_window.ui -->
+  <!-- interface-copyright Copyright (C) Tobias Frisch -->
   <!-- interface-authors Tobias Frisch -->
-  <object class="HdyWindow" id="window">
+  <requires lib="gtk" version="4.18"/>
+  <requires lib="libadwaita" version="1.6"/>
+  <object class="AdwApplicationWindow" id="window">
     <property name="height-request">500</property>
-    <property name="can-focus">False</property>
-    <property name="icon-name">de.thejackimonster.KnockKnock</property>
     <property name="startup-id">de.thejackimonster.KnockKnock</property>
+    <property name="title">Knock Knock</property>
     <child>
       <object class="GtkBox">
-        <property name="visible">1</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="HdyWindowHandle">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
+          <object class="GtkWindowHandle">
             <child>
-              <object class="HdyHeaderBar" id="header_bar">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="title" translatable="yes">Knock Knock</property>
-                <property name="show-close-button">True</property>
-                <child>
+              <object class="AdwHeaderBar" id="header_bar">
+                <child type="start">
                   <object class="GtkButton" id="menu_button">
-                    <property name="visible">1</property>
-                    <property name="can-focus">1</property>
-                    <property name="receives-default">1</property>
-                    <property name="relief">none</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">1</property>
-                        <property name="icon-name">open-menu-symbolic</property>
-                      </object>
-                    </child>
+                    <property name="icon-name">open-menu-symbolic</property>
                   </object>
                 </child>
-                <child>
+                <child type="end">
                   <object class="GtkButton" id="settings_button">
-                    <property name="visible">1</property>
-                    <property name="can-focus">1</property>
-                    <property name="receives-default">1</property>
-                    <property name="relief">none</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">1</property>
-                        <property name="icon-name">applications-system-symbolic</property>
-                      </object>
-                    </child>
+                    <property name="icon-name">applications-system-symbolic</property>
                   </object>
-                  <packing>
-                    <property name="pack-type">end</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
             </child>
           </object>
         </child>
         <child>
-          <object class="HdyFlap" id="menu_flap">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="reveal-flap">False</property>
-            <property name="locked">True</property>
-            <child type="content">
+          <object class="AdwFlap" id="menu_flap">
+            <property name="content">
               <object class="GtkBox">
-                <property name="width-request">320</property>
-                <property name="visible">1</property>
+                <property name="hexpand">True</property>
                 <property name="orientation">vertical</property>
+                <property name="width-request">320</property>
                 <child>
                   <object class="GtkStack" id="state_stack">
-                    <property name="visible">1</property>
+                    <property name="vexpand">True</property>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkSpinner">
-                            <property name="height-request">48</property>
-                            <property name="visible">1</property>
-                            <property name="active">1</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkSpinner">
+                                <property name="height-request">48</property>
+                                <property name="spinning">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Searching door...</property>
+                              </object>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Searching door...</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">searching</property>
-                      </packing>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkSpinner">
-                            <property name="height-request">48</property>
-                            <property name="visible">1</property>
-                            <property name="active">1</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkSpinner">
+                                <property name="height-request">48</property>
+                                <property name="spinning">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Opening door...</property>
+                              </object>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Opening door...</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">opening</property>
-                        <property name="position">1</property>
-                      </packing>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkSpinner">
-                            <property name="height-request">48</property>
-                            <property name="visible">1</property>
-                            <property name="active">1</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkSpinner">
+                                <property name="height-request">48</property>
+                                <property name="spinning">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Closing door...</property>
+                              </object>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Closing door...</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">closing</property>
-                        <property name="position">2</property>
-                      </packing>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">1</property>
-                            <property name="margin-start">8</property>
-                            <property name="margin-end">8</property>
-                            <property name="margin-top">8</property>
-                            <property name="margin-bottom">8</property>
-                            <property name="icon-name">dialog-password-symbolic</property>
-                            <property name="icon-size">6</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">dialog-password-symbolic</property>
+                                <property name="icon-size">large</property>
+                                <property name="pixel-size">48</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Ready!</property>
+                              </object>
+                            </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Ready!</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">ready</property>
-                        <property name="position">3</property>
-                      </packing>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">1</property>
-                            <property name="margin-start">8</property>
-                            <property name="margin-end">8</property>
-                            <property name="margin-top">8</property>
-                            <property name="margin-bottom">8</property>
-                            <property name="icon-name">dialog-warning-symbolic</property>
-                            <property name="icon-size">6</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">dialog-warning-symbolic</property>
+                                <property name="icon-size">large</property>
+                                <property name="pixel-size">48</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="error_label">
+                                <property name="label">...</property>
+                              </object>
+                            </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="error_label">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">...</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">error</property>
-                        <property name="position">4</property>
-                      </packing>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkSpinner">
-                            <property name="height-request">48</property>
-                            <property name="visible">1</property>
-                            <property name="active">1</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkSpinner">
+                                <property name="height-request">48</property>
+                                <property name="spinning">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">Reading status...</property>
+                              </object>
+                            </child>
                           </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">Reading status...</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">reading</property>
-                        <property name="position">5</property>
-                      </packing>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">1</property>
-                            <property name="margin-start">8</property>
-                            <property name="margin-end">8</property>
-                            <property name="margin-top">8</property>
-                            <property name="margin-bottom">8</property>
-                            <property name="icon-name">dialog-information-symbolic</property>
-                            <property name="icon-size">6</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">dialog-information-symbolic</property>
+                                <property name="icon-size">large</property>
+                                <property name="pixel-size">48</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="status_label">
+                                <property name="label">...</property>
+                              </object>
+                            </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="status_label">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">...</property>
-                          </object>
-                          <packing>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">status</property>
-                        <property name="position">6</property>
-                      </packing>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">1</property>
-                        <property name="valign">center</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">1</property>
-                            <property name="margin-start">8</property>
-                            <property name="margin-end">8</property>
-                            <property name="margin-top">8</property>
-                            <property name="margin-bottom">8</property>
-                            <property name="icon-name">edit-find-symbolic</property>
-                            <property name="icon-size">6</property>
+                      <object class="GtkStackPage">
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">8</property>
+                            <property name="valign">center</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">edit-find-symbolic</property>
+                                <property name="icon-size">large</property>
+                                <property name="pixel-size">48</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label">No doors available!</property>
+                              </object>
+                            </child>
                           </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="visible">1</property>
-                            <property name="label" translatable="yes">No doors available!</property>
-                          </object>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
+                        </property>
                         <property name="name">none</property>
-                        <property name="position">7</property>
-                      </packing>
+                      </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">1</property>
-                  </packing>
                 </child>
                 <child>
-                  <object class="GtkToolbar">
-                    <property name="visible">1</property>
+                  <object class="GtkBox">
                     <property name="halign">center</property>
-                    <property name="toolbar-style">both</property>
                     <child>
-                      <object class="GtkToolButton" id="refresh_button">
-                        <property name="visible">1</property>
-                        <property name="label" translatable="yes">Refresh</property>
-                        <property name="use-underline">1</property>
-                        <property name="icon-name">view-refresh-symbolic</property>
+                      <object class="GtkButton" id="refresh_button">
+                        <property name="child">
+                          <object class="AdwButtonContent">
+                            <property name="can-shrink">True</property>
+                            <property name="icon-name">view-refresh-symbolic</property>
+                            <property name="label">Refresh</property>
+                            <property name="use-underline">True</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkToolButton" id="open_button">
-                        <property name="visible">1</property>
-                        <property name="label" translatable="yes">Open</property>
-                        <property name="use-underline">1</property>
-                        <property name="icon-name">changes-allow-symbolic</property>
+                      <object class="GtkButton" id="open_button">
+                        <property name="child">
+                          <object class="AdwButtonContent">
+                            <property name="can-shrink">True</property>
+                            <property name="icon-name">changes-allow-symbolic</property>
+                            <property name="label">Open</property>
+                            <property name="use-underline">True</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkToolButton" id="close_button">
-                        <property name="visible">1</property>
-                        <property name="label" translatable="yes">Close</property>
-                        <property name="use-underline">1</property>
-                        <property name="icon-name">changes-prevent-symbolic</property>
+                      <object class="GtkButton" id="close_button">
+                        <property name="child">
+                          <object class="AdwButtonContent">
+                            <property name="can-shrink">True</property>
+                            <property name="icon-name">changes-prevent-symbolic</property>
+                            <property name="label">Close</property>
+                            <property name="use-underline">True</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkToolButton" id="status_button">
-                        <property name="visible">1</property>
-                        <property name="label" translatable="yes">Status</property>
-                        <property name="use-underline">1</property>
-                        <property name="icon-name">dialog-information-symbolic</property>
+                      <object class="GtkButton" id="status_button">
+                        <property name="child">
+                          <object class="AdwButtonContent">
+                            <property name="can-shrink">True</property>
+                            <property name="icon-name">dialog-information-symbolic</property>
+                            <property name="label">Status</property>
+                            <property name="use-underline">True</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkToolButton" id="cancel_button">
-                        <property name="visible">1</property>
-                        <property name="label" translatable="yes">Cancel</property>
-                        <property name="use-underline">1</property>
-                        <property name="icon-name">process-stop-symbolic</property>
+                      <object class="GtkButton" id="cancel_button">
+                        <property name="child">
+                          <object class="AdwButtonContent">
+                            <property name="can-shrink">True</property>
+                            <property name="icon-name">process-stop-symbolic</property>
+                            <property name="label">Cancel</property>
+                            <property name="use-underline">True</property>
+                          </object>
+                        </property>
                       </object>
                     </child>
+                    <style>
+                      <class name="toolbar"/>
+                    </style>
                   </object>
-                  <packing>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
               </object>
-            </child>
-            <child type="separator">
-              <object class="GtkSeparator">
-                <property name="visible">1</property>
-              </object>
-            </child>
-            <child type="flap">
+            </property>
+            <property name="flap">
               <object class="GtkBox">
-                <property name="visible">1</property>
+                <property name="css-classes">flap-background
+</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">2</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">1</property>
-                    <property name="border-width">4</property>
+                    <property name="margin-bottom">4</property>
+                    <property name="margin-end">4</property>
+                    <property name="margin-start">4</property>
+                    <property name="margin-top">4</property>
                     <property name="spacing">4</property>
                     <child>
                       <object class="GtkButton" id="add_button">
-                        <property name="visible">1</property>
-                        <property name="can-focus">1</property>
-                        <property name="receives-default">1</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">1</property>
-                            <property name="icon-name">list-add-symbolic</property>
-                          </object>
-                        </child>
+                        <property name="icon-name">list-add-symbolic</property>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkSearchEntry" id="search_entry">
-                        <property name="visible">1</property>
-                        <property name="can-focus">1</property>
-                        <property name="primary-icon-name">edit-find-symbolic</property>
-                        <property name="primary-icon-activatable">0</property>
-                        <property name="primary-icon-sensitive">0</property>
-                      </object>
-                      <packing>
-                        <property name="expand">1</property>
-                        <property name="position">1</property>
-                      </packing>
+                      <object class="GtkSearchEntry" id="search_entry"/>
                     </child>
                     <child>
                       <object class="GtkButton" id="remove_button">
-                        <property name="visible">1</property>
-                        <property name="sensitive">0</property>
-                        <property name="can-focus">1</property>
-                        <property name="receives-default">1</property>
-                        <property name="relief">none</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="visible">1</property>
-                            <property name="icon-name">list-remove-symbolic</property>
-                          </object>
-                        </child>
+                        <property name="icon-name">list-remove-symbolic</property>
                       </object>
-                      <packing>
-                        <property name="pack-type">end</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
                 <child>
                   <object class="GtkScrolledWindow">
+                    <property name="hscrollbar-policy">never</property>
                     <property name="width-request">280</property>
-                    <property name="visible">1</property>
-                    <property name="can-focus">1</property>
-                    <property name="shadow-type">in</property>
                     <child>
                       <object class="GtkViewport">
-                        <property name="visible">1</property>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">1</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">2</property>
                             <child>
                               <object class="GtkListBox" id="doors_listbox">
-                                <property name="visible">1</property>
+                                <property name="vexpand">True</property>
                               </object>
-                              <packing>
-                                <property name="expand">1</property>
-                              </packing>
                             </child>
                             <child>
-                              <object class="GtkBox">
-                                <property name="visible">1</property>
-                                <property name="border-width">8</property>
-                                <property name="spacing">4</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">1</property>
-                                    <property name="icon-name">de.thejackimonster.KnockKnock</property>
-                                    <property name="icon-size">6</property>
-                                  </object>
-                                </child>
-                                <child>
+                              <object class="GtkCenterBox">
+                                <property name="center-widget">
                                   <object class="GtkBox">
-                                    <property name="visible">1</property>
-                                    <property name="valign">center</property>
+                                    <property name="hexpand">True</property>
                                     <property name="orientation">vertical</property>
+                                    <property name="valign">center</property>
                                     <child>
                                       <object class="GtkLabel">
-                                        <property name="visible">1</property>
-                                        <property name="label" translatable="yes">Knock Knock</property>
-                                        <property name="xalign">0</property>
+                                        <property name="label">Knock Knock</property>
+                                        <property name="xalign">0.0</property>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkBox">
-                                        <property name="visible">1</property>
                                         <property name="spacing">4</property>
                                         <child>
                                           <object class="GtkLabel">
-                                            <property name="visible">1</property>
-                                            <property name="label" translatable="yes">Version:</property>
-                                            <property name="xalign">0</property>
+                                            <property name="label">Version:</property>
+                                            <property name="xalign">0.0</property>
                                           </object>
                                         </child>
                                         <child>
                                           <object class="GtkLabel" id="version_label">
-                                            <property name="visible">1</property>
-                                            <property name="label" translatable="yes">0.0.0</property>
-                                            <property name="xalign">0</property>
+                                            <property name="label">0.0.0</property>
+                                            <property name="xalign">0.0</property>
                                           </object>
-                                          <packing>
-                                            <property name="position">1</property>
-                                          </packing>
                                         </child>
                                       </object>
-                                      <packing>
-                                        <property name="position">1</property>
-                                      </packing>
                                     </child>
                                   </object>
-                                  <packing>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                                <child>
+                                </property>
+                                <property name="end-widget">
                                   <object class="GtkButton" id="about_button">
-                                    <property name="visible">1</property>
-                                    <property name="can-focus">1</property>
-                                    <property name="receives-default">1</property>
+                                    <property name="icon-name">help-about-symbolic</property>
+                                    <property name="margin-bottom">8</property>
+                                    <property name="margin-end">8</property>
+                                    <property name="margin-start">8</property>
+                                    <property name="margin-top">8</property>
                                     <property name="valign">center</property>
-                                    <property name="border-width">4</property>
-                                    <property name="relief">none</property>
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">1</property>
-                                        <property name="icon-name">help-about-symbolic</property>
-                                      </object>
-                                    </child>
                                   </object>
-                                  <packing>
-                                    <property name="pack-type">end</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
+                                </property>
+                                <property name="start-widget">
+                                  <object class="GtkImage">
+                                    <property name="icon-name">de.thejackimonster.KnockKnock</property>
+                                    <property name="icon-size">large</property>
+                                    <property name="margin-bottom">8</property>
+                                    <property name="margin-end">8</property>
+                                    <property name="margin-start">8</property>
+                                    <property name="margin-top">8</property>
+                                  </object>
+                                </property>
                               </object>
-                              <packing>
-                                <property name="position">1</property>
-                              </packing>
                             </child>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">1</property>
-                    <property name="pack-type">end</property>
-                    <property name="position">1</property>
-                  </packing>
                 </child>
-                <style>
-                  <class name="flap-background"/>
-                </style>
               </object>
-            </child>
+            </property>
+            <property name="locked">True</property>
+            <property name="reveal-flap">False</property>
+            <property name="separator">
+              <object class="GtkSeparator"/>
+            </property>
           </object>
-          <packing>
-            <property name="expand">1</property>
-            <property name="pack-type">end</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>
