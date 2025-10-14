@@ -11,7 +11,16 @@ __license_version__ = "3.0.0"
 __maintainer__ = "Tobias Frisch"
 __email__ = "jacki@thejackimonster.de"
 __status__ = "Production"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
+
+__release_notes_version__ = __version__
+__release_notes__ = '''
+    <ul>
+		<li>Interface uses GTK4 with libadwaita now instead of GTK3 and libhandy.</li>
+		<li>A fallback can be used in case the ping executable is missing or access is restricted.</li>
+		<li>Multiple bugs and minor issues got fixed.</li>
+	</ul>
+'''
 
 import base64
 import gi
@@ -394,6 +403,9 @@ def about_dialog(window):
     dialog = builder.get_object("dialog")
 
     dialog.set_version(__version__)
+
+    dialog.set_release_notes_version(__release_notes_version__)
+    dialog.set_release_notes(__release_notes__)
 
     dialog.present(window)
 

@@ -55,6 +55,16 @@
 	<launchable type="desktop-id">de.thejackimonster.KnockKnock.desktop</launchable>
 
 	<releases>
+		<release version="1.1.0" date="2025-10-14">
+			<description>
+				<ul>
+					<li>Interface uses GTK4 with libadwaita now instead of GTK3 and libhandy.</li>
+					<li>A fallback can be used in case the ping executable is missing or access is restricted.</li>
+					<li>Multiple bugs and minor issues got fixed.</li>
+				</ul>
+			</description>
+			<url>https://gitlab.com/TheJackiMonster/knock-knock/-/releases/v1.0.0</url>
+		</release>
 		<release version="1.0.0" date="2025-09-10">
 			<description>
 				<ul>
