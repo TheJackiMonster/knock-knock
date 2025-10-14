@@ -46,7 +46,8 @@ along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.-->
           </object>
         </child>
         <child>
-          <object class="AdwFlap" id="menu_flap">
+          <object class="AdwOverlaySplitView" id="menu_overlay">
+            <property name="collapsed">True</property>
             <property name="content">
               <object class="GtkBox">
                 <property name="hexpand">True</property>
@@ -315,7 +316,9 @@ along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.-->
                 </child>
               </object>
             </property>
-            <property name="flap">
+            <property name="pin-sidebar">True</property>
+            <property name="show-sidebar">False</property>
+            <property name="sidebar">
               <object class="GtkBox">
                 <property name="css-classes">flap-background
 </property>
@@ -419,11 +422,6 @@ along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.-->
                   </object>
                 </child>
               </object>
-            </property>
-            <property name="locked">True</property>
-            <property name="reveal-flap">False</property>
-            <property name="separator">
-              <object class="GtkSeparator"/>
             </property>
           </object>
         </child>

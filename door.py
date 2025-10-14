@@ -420,11 +420,9 @@ def main(application):
 
     window = builder.get_object("window")
     window.set_application(application)
-
-    print(application.get_application_id())
     
     header_bar = builder.get_object("header_bar")
-    menu_flap = builder.get_object("menu_flap")
+    menu_overlay = builder.get_object("menu_overlay")
 
     menu_button = builder.get_object("menu_button")
     settings_button = builder.get_object("settings_button")
@@ -716,7 +714,7 @@ def main(application):
         else:
             set_state("none")
         
-        menu_flap.set_reveal_flap(False)
+        menu_overlay.set_show_sidebar(False)
     
     def window_remove_door(door):
         row = door_get_row(door)
@@ -742,7 +740,7 @@ def main(application):
     collection.remove_door = window_remove_door
 
     def on_menu(_button):
-        menu_flap.set_reveal_flap(not menu_flap.get_reveal_flap())
+        menu_overlay.set_show_sidebar(not menu_overlay.get_show_sidebar())
     
     def on_settings(_button):
         edit_door_dialog(window)

@@ -18,8 +18,8 @@ along with Knock Knock.  If not, see <http://www.gnu.org/licenses/>.-->
   <!-- interface-name edit_door_dialog.ui -->
   <!-- interface-copyright Copyright (C) Tobias Frisch -->
   <!-- interface-authors Tobias Frisch -->
-  <requires lib="libadwaita" version="1.6"/>
   <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.6"/>
   <object class="AdwPreferencesDialog" id="dialog">
     <property name="content-height">770</property>
     <property name="content-width">300</property>
