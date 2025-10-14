@@ -8,7 +8,7 @@ Application to interact with SSH doors
 
 ## Features
 
-This application is used to interact with door locks via SSH over local network (typically Wi-Fi). It's intended to mirror some functionality of the Android app called "Trigger" which is available via [F-Droid](https://f-droid.org/de/packages/com.example.trigger/). However this application is using GTK+ with some widgets from libhandy to provide a usable interface for mobile Linux devices.
+This application is used to interact with door locks via SSH over local network (typically Wi-Fi). It's intended to mirror some functionality of the Android app called "Trigger" which is available via [F-Droid](https://f-droid.org/de/packages/com.example.trigger/). However this application is using GTK4 with some widgets from libadwaita to provide a usable interface for mobile Linux devices.
 
 ![Overview of the application](screenshots/overview.png)
 
@@ -39,5 +39,5 @@ Simply swipe the menu on the left side of the window into the screen or open it 
 
 You can still change most details in a later stage via the settings button in the right upper corner and every configurations gets listed via its unique name. So you can select which one to use or scan for in your local network.
 
-Notice that this application uses the `ssh` and the `ping` command internally. So that's required to be installed as well as 'gtk3', 'libhandy', 'libgio' and 'glib'.
+Notice that this application uses the `ssh` and the `ping` command internally. So that's required to be installed as well as 'gtk4', 'libadwaita', 'libgio' and 'glib'.
 
