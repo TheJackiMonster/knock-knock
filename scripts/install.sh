@@ -5,9 +5,17 @@ cd ..
 APPLICATION_ID="de.thejackimonster.KnockKnock"
 PREFIX=/usr/local
 
-if [ $# -gt 0 ]; then
-	PREFIX=$1
-fi
+SKIP_UPDATE=0
+
+while [ $# -gt 0 ]; do
+	if [ $1 == "--skip-update" ]; then
+		SKIP_UPDATE=1
+	else
+		PREFIX=$1
+	fi
+
+	shift
+done
 
 mkdir -p $PREFIX/share/knock-knock
 cp AUTHORS $PREFIX/share/knock-knock/AUTHORS
@@ -36,6 +44,10 @@ chmod +x $PREFIX/bin/knock-knock
 
 mkdir -p $PREFIX/share/applications
 cp resources/$APPLICATION_ID.desktop $PREFIX/share/applications/$APPLICATION_ID.desktop
+
+if [ $SKIP_UPDATE -gt 0 ]; then
+	exit
+fi
 
 gtk-update-icon-cache -f -t $PREFIX/share/icons/hicolor
 update-desktop-database
