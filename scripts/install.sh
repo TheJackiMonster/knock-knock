@@ -37,5 +37,5 @@ chmod +x $PREFIX/bin/knock-knock
 mkdir -p $PREFIX/share/applications
 cp resources/$APPLICATION_ID.desktop $PREFIX/share/applications/$APPLICATION_ID.desktop
 
-gtk-update-icon-cache -t $PREFIX/share/icons/hicolor
+gtk-update-icon-cache -f -t $PREFIX/share/icons/hicolor
 update-desktop-database
